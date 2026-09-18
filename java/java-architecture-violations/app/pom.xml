@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.archguard.samples</groupId>
+    <artifactId>java-architecture-violations</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>violations-app</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>io.archguard.samples</groupId>
+      <artifactId>violations-core</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bad</groupId>
+      <artifactId>danger</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+  </dependencies>
+</project>

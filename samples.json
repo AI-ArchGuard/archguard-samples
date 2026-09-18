@@ -1,0 +1,75 @@
+{
+  "formatVersion": "1.0.0",
+  "scannerVersion": "0.2.0",
+  "contractVersion": "0.1.0",
+  "cases": [
+    {
+      "id": "java-clean-layered",
+      "project": "java/java-clean-layered",
+      "rules": "java/java-clean-layered/archguard-rules.yaml",
+      "golden": "java/java-clean-layered/expected/report.json",
+      "expectedExit": 0,
+      "expectedFindings": 0,
+      "expectedDiagnostics": 0,
+      "repeat": 3,
+      "maxSeconds": 15
+    },
+    {
+      "id": "java-architecture-violations",
+      "project": "java/java-architecture-violations",
+      "rules": "java/java-architecture-violations/archguard-rules.yaml",
+      "golden": "java/java-architecture-violations/expected/report.json",
+      "expectedExit": 2,
+      "expectedFindings": 13,
+      "expectedDiagnostics": 0,
+      "repeat": 3,
+      "maxSeconds": 15
+    },
+    {
+      "id": "java-dependency-cycle",
+      "project": "java/java-dependency-cycle",
+      "rules": "java/java-dependency-cycle/archguard-rules.yaml",
+      "golden": "java/java-dependency-cycle/expected/report.json",
+      "expectedExit": 2,
+      "expectedFindings": 2,
+      "expectedDiagnostics": 0,
+      "repeat": 3,
+      "maxSeconds": 15
+    }
+  ],
+  "failures": [
+    {
+      "id": "invalid-syntax",
+      "project": "java/failures/invalid-syntax",
+      "rules": "java/failures/invalid-syntax/archguard-rules.yaml",
+      "golden": "java/failures/invalid-syntax/expected/report.json",
+      "expectedExit": 70,
+      "expectedFindings": 0,
+      "expectedDiagnostics": 1,
+      "expectedStderrCode": "java.syntax.invalid",
+      "reportExpected": true,
+      "repeat": 3,
+      "maxSeconds": 15
+    },
+    {
+      "id": "unknown-rule",
+      "project": "java/java-clean-layered",
+      "rules": "java/failures/unknown-rule.yaml",
+      "expectedExit": 64,
+      "expectedStderrCode": "config.schema.invalid",
+      "reportExpected": false,
+      "repeat": 1,
+      "maxSeconds": 15
+    },
+    {
+      "id": "resource-limit",
+      "project": "java/java-dependency-cycle",
+      "rules": "java/failures/resource-limit.yaml",
+      "expectedExit": 70,
+      "expectedStderrCode": "java.limit.files",
+      "reportExpected": false,
+      "repeat": 1,
+      "maxSeconds": 15
+    }
+  ]
+}

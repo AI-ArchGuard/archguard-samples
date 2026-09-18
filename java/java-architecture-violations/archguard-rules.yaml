@@ -1,0 +1,52 @@
+version: 0.1.0
+project:
+  identity: samples:java-architecture-violations
+  name: Java Architecture Violations
+failOn: high
+rules:
+  - id: archguard.illegal-package-dependency
+    parameters:
+      policies:
+        - source: com.archguard.samples.violations.app.web
+          deniedTargets: [com.archguard.samples.violations.core.internal]
+  - id: archguard.layered-architecture
+    parameters:
+      allowLayerSkipping: false
+      layers:
+        - name: web
+          packages: [com.archguard.samples.violations.app.web]
+        - name: application
+          packages: [com.archguard.samples.violations.app.application]
+        - name: core-api
+          packages: [com.archguard.samples.violations.core.api]
+        - name: core-internal
+          packages: [com.archguard.samples.violations.core.internal]
+  - id: archguard.dependency-cycle
+    parameters:
+      scope: package
+  - id: spring.controller-repository-access
+  - id: archguard.internal-module-access
+    parameters:
+      boundaries:
+        - modulePath: app
+          publicPackages: [com.archguard.samples.violations.app.**]
+        - modulePath: core
+          publicPackages: [com.archguard.samples.violations.core.api]
+  - id: archguard.forbidden-component
+    parameters:
+      selectors:
+        - type: com.archguard.samples.violations.core.internal.ForbiddenType
+        - package: com.archguard.samples.violations.core.internal.**
+        - maven: org.bad:danger:2.0.0
+  - id: archguard.complexity-threshold
+    parameters:
+      functionThreshold: 3
+      typeThreshold: 4
+      moduleThreshold: 6
+  - id: archguard.required-annotation
+    parameters:
+      requirements:
+        - annotation: com.archguard.samples.violations.app.arch.Reviewed
+          componentKinds: [type]
+          declarationKinds: [class]
+          packages: [com.archguard.samples.violations.app.application]
