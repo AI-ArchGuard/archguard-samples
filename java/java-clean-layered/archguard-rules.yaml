@@ -1,0 +1,52 @@
+version: 0.1.0
+project:
+  identity: samples:java-clean-layered
+  name: Java Clean Layered
+failOn: high
+rules:
+  - id: archguard.illegal-package-dependency
+    parameters:
+      policies:
+        - source: com.archguard.samples.clean.web
+          allowedTargets: [com.archguard.samples.clean.application, com.archguard.samples.clean.domain]
+        - source: com.archguard.samples.clean.application
+          allowedTargets: [com.archguard.samples.clean.arch, com.archguard.samples.clean.domain, com.archguard.samples.clean.infrastructure]
+        - source: com.archguard.samples.clean.infrastructure
+          allowedTargets: [com.archguard.samples.clean.domain]
+  - id: archguard.layered-architecture
+    parameters:
+      allowLayerSkipping: true
+      layers:
+        - name: web
+          packages: [com.archguard.samples.clean.web]
+        - name: application
+          packages: [com.archguard.samples.clean.application]
+        - name: infrastructure
+          packages: [com.archguard.samples.clean.infrastructure]
+        - name: domain
+          packages: [com.archguard.samples.clean.domain]
+  - id: archguard.dependency-cycle
+    parameters:
+      scope: package
+  - id: spring.controller-repository-access
+  - id: archguard.internal-module-access
+    parameters:
+      boundaries:
+        - modulePath: .
+          publicPackages: [com.archguard.samples.clean.**]
+  - id: archguard.forbidden-component
+    parameters:
+      selectors:
+        - package: java.sql.**
+  - id: archguard.complexity-threshold
+    parameters:
+      functionThreshold: 10
+      typeThreshold: 30
+      moduleThreshold: 100
+  - id: archguard.required-annotation
+    parameters:
+      requirements:
+        - annotation: com.archguard.samples.clean.arch.ArchGuarded
+          componentKinds: [type]
+          declarationKinds: [class]
+          packages: [com.archguard.samples.clean.application]

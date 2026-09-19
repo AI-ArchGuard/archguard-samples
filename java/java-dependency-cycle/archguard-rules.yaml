@@ -1,0 +1,9 @@
+version: 0.1.0
+project:
+  identity: samples:java-dependency-cycle
+  name: Java Dependency Cycle
+failOn: high
+rules:
+  - id: archguard.dependency-cycle
+    parameters:
+      scope: package

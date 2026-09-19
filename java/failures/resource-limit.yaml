@@ -1,0 +1,11 @@
+version: 0.1.0
+project:
+  identity: samples:resource-limit
+  name: Resource Limit
+failOn: high
+limits:
+  maxFiles: 1
+rules:
+  - id: archguard.dependency-cycle
+    parameters:
+      scope: package

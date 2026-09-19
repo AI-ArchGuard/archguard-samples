@@ -4,7 +4,7 @@ ArchGuard 的正常与故障合成样例工程集合，用于 Scanner、Platform
 
 ## 当前状态
 
-阶段 0 `v0.1.0-foundation` 正在远端收口。阶段 1 将首先增加至少三个 Java 合成项目，服务 `v0.2.0-scanner` 的正常、违规、循环和失败黄金测试；Go/Python 样例只有在对应语言阶段通过独立 Spec 后才启用。当前没有可运行样例，也不提前进入阶段 1 实现。
+阶段 1 S7 已提供三个合成 Java 项目、三类失败夹具、Scanner `0.2.0`/Result Schema `0.1.0` 黄金报告及重复性/性能验证脚本。最终接受以 Samples PR、Scanner 提供方 CI 和 `v0.2.0` 发布证据为准；Go 样例仍未启用。
 
 ## 职责
 
@@ -28,14 +28,22 @@ ArchGuard 的正常与故障合成样例工程集合，用于 Scanner、Platform
 
 ## 本地验证
 
-当前基线可执行：
+静态验证样例清单、相对路径和黄金 digest：
 
 ```bash
-git diff --check
-git status --short
+python3 scripts/verify_samples.py .
 ```
 
-新增样例时必须在各样例目录记录构建命令和预期成功/失败结果；当前没有可运行的样例构建。
+使用已构建的 Scanner 执行全部黄金、失败、三次逐字节重复性和性能上限验证：
+
+```bash
+python3 scripts/verify_with_scanner.py \
+  --jar ../archguard-scanner/scanner-cli/target/archguard-scanner.jar \
+  --samples . \
+  --results target/s7-results.json
+```
+
+样例不执行自身 Maven 构建，也不访问网络。`samples.json` 是样例版本、退出码、计数、重复次数和性能上限的机器入口；各样例 README 记录目的与预期结果。
 
 ## 许可证
 
