@@ -6,6 +6,8 @@ ArchGuard 的正常与故障合成样例工程集合，用于 Scanner、Platform
 
 阶段 1 S7 已提供三个合成 Java 项目、三类失败夹具、Scanner `0.2.0`/Result Schema `0.1.0` 黄金报告及重复性/性能验证脚本。最终接受以 Samples PR、Scanner 提供方 CI 和 `v0.2.0` 发布证据为准；Go 样例仍未启用。
 
+阶段 3B 增加[治理指纹固定向量](governance/README.md)，验证现有黄金报告能支撑 Platform 跨扫描逻辑身份；原报告和 Scanner Schema 不变。
+
 ## 职责
 
 - 提供小型、确定、可公开的 Java、Go 和 Python 正常/违规样例；按路线逐个启用，不同时铺开。
