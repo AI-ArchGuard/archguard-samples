@@ -1,0 +1,12 @@
+{
+  "formatVersion": "1.0.0",
+  "scannerSchemaVersion": "0.1.0",
+  "fingerprintAlgorithmVersion": "platform-finding-v1",
+  "sourceReport": "java/java-architecture-violations/expected/report.json",
+  "sourceReportSha256": "5e18ae10ed6fb6f3315f1c907cc982f9ae64a27d3d110d6085209ee0ccb5a5a7",
+  "introducedFindingId": "finding_c7f93e35e91a99b28c25b8b471814c377a7f4b07946d575b9a4eac83c76e1358",
+  "expected": {
+    "introduced": {"NEW": 1, "EXISTING": 12, "RESOLVED": 0, "gate": "FAIL", "exitCode": 2},
+    "repaired": {"NEW": 0, "EXISTING": 12, "RESOLVED": 1, "gate": "PASS", "exitCode": 0}
+  }
+}

@@ -38,3 +38,5 @@ jobs:
         run: python3 scripts/verify_samples.py .
       - name: Verify governance fingerprint contract vectors
         run: python3 scripts/verify_governance_contract.py
+      - name: Verify fixed governance CI journey
+        run: python3 scripts/verify_governance_journey.py
