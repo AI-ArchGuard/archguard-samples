@@ -1,0 +1,11 @@
+version: 0.1.0
+project:
+  identity: samples:java-ci-journey
+  name: Java CI Journey
+failOn: high
+rules:
+  - id: archguard.illegal-package-dependency
+    parameters:
+      policies:
+        - source: com.archguard.samples.governance.app
+          deniedTargets: [com.archguard.samples.governance.internal]

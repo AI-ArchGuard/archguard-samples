@@ -40,3 +40,24 @@ jobs:
         run: python3 scripts/verify_governance_contract.py
       - name: Verify fixed governance CI journey
         run: python3 scripts/verify_governance_journey.py
+
+  source-journey:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Samples
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Checkout pinned Scanner 0.2.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: AI-ArchGuard/archguard-scanner
+          ref: d4b8e98bfdabbc78f65910ed37e3062167d04b07
+          path: scanner
+      - name: Set up Java 21
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build pinned Scanner
+        run: mvn -q -f scanner/pom.xml -DskipTests package
+      - name: Verify actual Scanner source journey
+        run: python3 scripts/verify_governance_source_journey.py --scanner-jar scanner/scanner-cli/target/archguard-scanner.jar
