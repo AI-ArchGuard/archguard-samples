@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.1.0",
+  "cases": [
+    {
+      "name": "supported-explanation",
+      "purpose": "FINDING_EXPLANATION",
+      "findingRefs": ["f1"],
+      "citationIds": ["c1", "d1"],
+      "output": {
+        "schemaVersion": "0.1.0",
+        "purpose": "FINDING_EXPLANATION",
+        "conclusion": {"kind": "SUPPORTED", "text": "The selected dependency reaches an internal package.", "citationIds": ["c1"]},
+        "claims": [{"findingRef": "f1", "text": "The dependency is present in the scan.", "citationIds": ["c1"]}],
+        "ruleBasis": [{"findingRef": "f1", "text": "The internal-module-access rule identifies this dependency.", "citationIds": ["c1"]}],
+        "suggestions": [{"kind": "LOW_RISK_DIRECTION", "text": "Review a public API boundary with the maintainer.", "findingRefs": ["f1"], "citationIds": ["c1", "d1"], "requiresHumanReview": true}],
+        "limitations": ["This advice does not change the scan or gate."]
+      },
+      "expected": "SUCCEEDED"
+    },
+    {
+      "name": "insufficient-summary",
+      "purpose": "PR_SUMMARY",
+      "findingRefs": ["f1", "f2"],
+      "citationIds": [],
+      "output": {
+        "schemaVersion": "0.1.0",
+        "purpose": "PR_SUMMARY",
+        "conclusion": {"kind": "INSUFFICIENT", "text": null, "citationIds": []},
+        "claims": [],
+        "ruleBasis": [],
+        "suggestions": [],
+        "limitations": ["Evidence is insufficient for a supported summary."]
+      },
+      "expected": "SUCCEEDED"
+    },
+    {"name": "fabricated-citation", "citationIds": ["fake"], "expected": "CITATION_INVALID"},
+    {"name": "cross-project-citation", "citationIds": ["foreign-project"], "expected": "CITATION_INVALID"},
+    {"name": "stale-document-version", "citationIds": ["stale-document"], "expected": "CITATION_INVALID"},
+    {"name": "unknown-finding", "findingRefs": ["not-selected"], "expected": "OUTPUT_INVALID"},
+    {"name": "unknown-field", "payloadExtra": "unexpected", "expected": "OUTPUT_INVALID"},
+    {"name": "refusal", "providerStatus": "refusal", "expected": "OUTPUT_INVALID"},
+    {"name": "incomplete", "providerStatus": "incomplete", "expected": "OUTPUT_INVALID"},
+    {"name": "document-prompt-injection", "document": "injectedDocumentText", "expected": "OUTPUT_INVALID"},
+    {"name": "same-key-same-digest", "idempotency": "replay", "expected": "SAME_REQUEST"},
+    {"name": "same-key-different-digest", "idempotency": "conflict", "expected": "CONFLICT"}
+  ]
+}
