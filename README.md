@@ -8,6 +8,8 @@ ArchGuard 的正常与故障合成样例工程集合，用于 Scanner、Platform
 
 阶段 3B 增加[治理指纹固定向量](governance/README.md)，验证现有黄金报告能支撑 Platform 跨扫描逻辑身份；原报告和 Scanner Schema 不变。
 
+阶段 4B 增加[Agent 合成契约向量](agent/README.md)，覆盖所选 Finding/Evidence、文档版本和有效/无效输出场景；只用于契约验证，不启用模型或 Agent 运行时。
+
 ## 职责
 
 - 提供小型、确定、可公开的 Java、Go 和 Python 正常/违规样例；按路线逐个启用，不同时铺开。
@@ -34,6 +36,7 @@ ArchGuard 的正常与故障合成样例工程集合，用于 Scanner、Platform
 
 ```bash
 python3 scripts/verify_samples.py .
+python3 scripts/verify_agent_contract.py
 ```
 
 使用已构建的 Scanner 执行全部黄金、失败、三次逐字节重复性和性能上限验证：
