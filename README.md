@@ -37,6 +37,7 @@ ArchGuard 的正常与故障合成样例工程集合，用于 Scanner、Platform
 ```bash
 python3 scripts/verify_samples.py .
 python3 scripts/verify_agent_contract.py
+python3 scripts/verify_agent_hardening.py
 ```
 
 使用已构建的 Scanner 执行全部黄金、失败、三次逐字节重复性和性能上限验证：

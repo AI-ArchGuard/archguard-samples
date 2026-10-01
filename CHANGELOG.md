@@ -6,6 +6,8 @@
 
 ### Added
 
+- 4G：14 个固定合成安全与恢复案例及清单校验；实际运行验证仍由 Platform/Web 测试承担，不启用正式 Evals 或真实模型。
+
 - 初始化仓库治理、协作和质量基线。
 - 采用 Apache License 2.0，并在 CI 中固定标准许可证校验和。
 - 增加 Scanner S7 的三个合成 Java 项目、非法语法/未知规则/资源上限失败夹具，以及 Result Schema `0.1.0` 黄金报告与 SHA-256 digest。
